@@ -1,2 +1,25 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% flash.each do |type, message| %>
+<div class="alert alert<%= type  %>"><%= message %></div>
+<% end %>
+
+<h2>Inscris-toi vite !</h2>
+<hr>
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_tag url_for(action: 'create'), method: 'post' do %>
+        <b><%= label_tag "Ton prénom" %> <br>
+        <%= text_field_tag "first_name", nil, class: 'form-control', placeholder: 'Juste'  %> <br>
+        <%= label_tag "Ton nom" %> <br>
+        <%= text_field_tag "last_name", nil, class: 'form-control',placeholder: 'Leblanc'  %> <br>
+        <%= label_tag 'Ton email' %> <br>
+        <%= email_field_tag 'email', nil, class: 'form-control',placeholder: 'justeleblanc@mail.com' %> <br>
+        <%= label_tag "Ton mot de passe" %> <br>
+        <%= password_field_tag 'password', nil, class: 'form-control' %> <br>
+        <%= label_tag 'Confirme ton mot de passe'  %> <br>
+        <%= password_field_tag 'password_confirmation', nil, class: 'form-control' %></b> <br>
+        <hr>
+        <p style="font-size: 12px"><em>En créant un compte tu acceptes de faire partie de la communauté du Club-House et accepte de ne divulguer et ce qu'importe le moyen, tout ce dont vous pourriez être témoin.</em></p>
+
+        <%= submit_tag 'Enregistre-toi', class: 'btn btn-info'  %>
+    <% end %>
+
+  </div>

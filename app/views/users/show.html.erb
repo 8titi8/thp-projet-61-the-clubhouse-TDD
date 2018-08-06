@@ -1,2 +1,16 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+ <% flash.each do |type, message|  %>
+   <div class="alert alert-<%= type %>"><%= message %></div>
+   <% end %>
+
+  <h2>Comment ça va aujourd'hui <%= @user.first_name %> ?</h2>
+    <p><h4>Tes infos</h4>
+        <p><strong>Prénom</strong> : <%= @user.first_name %>
+          <br>
+          <strong>Nom</strong> :  <%= @user.last_name  %>
+          <br>
+          <strong>Email</strong> :  <%= @user.email  %></p>
+
+          <%= form_tag url_for(action: 'destroy'), method: 'delete' do  %> <br>
+            <%= submit_tag 'Supprimer mon compte', class: 'btn btn-secondary' %>
+          <% end %>
+          </p>

@@ -1,2 +1,10 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<div class="non-centered">
+  <h1>Les privilégiés sont</h1>
+
+  <p>
+    <% @user.each do |user| %>
+    <li><strong><%= user.first_name %> <%= user.last_name %></strong><br>
+      Contact <%= user.email %></li>
+    <% end %>
+  </p>
+</div>

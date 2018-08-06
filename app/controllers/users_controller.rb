@@ -1,11 +1,26 @@
 class UsersController < ApplicationController
 
   def index
-    @user = User.all
+    if logged_in?
+      @user = User.all
+      render 'index'
+    else
+      flash[:danger] = 'Vous devez vous connecter pour accéder à cette page !'
+      redirect_to login_path
+    end
   end
 
   def show
-    @user = User.find(params[:id])
+    if current_user.nil?
+      flash[:danger] = 'Vous devez vous connecter pour accéder à cette page !'
+      redirect_to login_path
+    elsif current_user.id == params[:id].to_i
+      @user = User.find(params[:id])
+      render 'show'
+    else
+      flash[:danger] = 'Vous devez vous connecter pour accéder à cette page !'
+      redirect_to login_path
+    end
   end
 
   def new
@@ -13,17 +28,39 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
+    @user = User.new(user_params)
+    if @user.save
+      log_in(@user)
+      flash[:success] = "Bravo, vous êtes bien inscrit !"
+      redirect_to user_path(@user.id)
+    else
+      flash[:warning] = "Pour vous inscrire, veuillez remplir tous les champs"
+      render 'new'
+    end
   end
 
   def edit
-    @user = User.find(params[:id])
+    if current_user.nil?
+      flash[:danger] = 'Vous devez vous connecter pour accéder à cette page !'
+      redirect_to login_path
+    elsif current_user.id == params[:id].to_i
+      @user = User.find(params[:id])
+      render 'edit'
+    else
+      flash[:danger] = 'Vous devez vous connecter pour accéder à cette page !'
+      redirect_to login_path
+    end
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
+    if @user.update(user_params)
+      flash[:success] = 'Vos informations ont bien été mises à jour !'
+      redirect_to user_path(@user.id)
+    else
+      flash[:warning] = 'Attention, pour modifier vos informations il faut entrer un mot de passe valide'
+      render 'edit'
+    end
   end
 
   def destroy
@@ -35,6 +72,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password_digest)
+    p param = params.permit(:first_name, :last_name, :email, :password)
   end
 end

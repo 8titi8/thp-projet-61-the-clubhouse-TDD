@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+body .container {
+  padding-top: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center
+
+}
+
+body .container .non-centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start
+}
