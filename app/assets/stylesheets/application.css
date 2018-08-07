@@ -29,3 +29,11 @@ body .container .non-centered {
   justify-content: center;
   align-items: flex-start
 }
+
+body .footer {
+  text-align: center;
+  font-weight: normal;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

@@ -1,10 +1,17 @@
+ <% flash.each do |type, message|  %>
+   <div class="alert alert-<%= type %>"><%= message %></div>
+   <% end %>
+
 <div class="non-centered">
   <h1>Les privilégiés sont</h1>
 
   <p>
     <% @user.each do |user| %>
     <li><strong><%= user.first_name %> <%= user.last_name %></strong><br>
-      Contact <%= user.email %></li>
+      Contact : <%= user.email %> <br>
+      <%= link_to("Modifier les informations", edit_user_path(user.id),class: "btn btn-sm btn-outline-info") %>
+    </li>
+    <p></p>
     <% end %>
   </p>
 </div>

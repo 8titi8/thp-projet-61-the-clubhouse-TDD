@@ -1,9 +1,18 @@
 require 'test_helper'
 
 class StaticPagesControllerTest < ActionDispatch::IntegrationTest
-  test "should get home" do
-    get static_pages_home_url
+
+  def setup
+    @user = users(:peter)
+  end
+  test "doit pouvoir acceder a la page home" do
+    get home_path
     assert_response :success
+  end
+
+  test "affiche home avec lien login si user non connecte" do
+    get home_path
+    assert_select "a", "connecter", "doit contenir le lien login"
   end
 
 end

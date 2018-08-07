@@ -1,2 +1,50 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<% flash.each do |type, message| %>
+<div class="alert alert<%= type  %>"><%= message %></div>
+<% end %>
+
+<% if current_user.id.to_i == @user.id %>
+    <h2>Modifie tes informations</h2>
+      <div class="col-md-6 col-md-offset-3">
+    <%= form_tag edit_user_path(current_user.id), method: 'patch' do %>
+        <strong>Prénom</strong> : <%= @user.first_name.capitalize %>
+          <br>
+        <b><%= label_tag "Ton nouveau prénom" %> <br>
+        <%= text_field_tag "first_name", nil, class: 'form-control', placeholder: "Juste" %> <br></b>
+        <strong>Nom</strong> :  <%= @user.last_name.capitalize  %>
+          <br>
+        <b><%= label_tag "Ton nouveau nom" %> <br>
+        <%= text_field_tag "last_name", nil, class: 'form-control',placeholder: 'Leblanc' %> <br></b>
+        <strong>Email</strong> :  <%= @user.email  %> <br>
+        <b><%= label_tag 'Ton email' %> <br>
+        <%= email_field_tag 'email', nil, class: 'form-control',placeholder: 'juste@leblanc.com' %> <br><br></b>
+        <hr>
+        <b><%= label_tag "Merci de confirmer ton mot de passe" %> <br></b>
+        <%= password_field_tag 'password', nil, class: 'form-control' %> <br>
+
+        <%= submit_tag 'Enregistre-toi', class: 'btn btn-info'  %>
+    <% end %>
+
+<% else %>
+    <h2>Modifie les informations de <%= @user.first_name.capitalize %></h2>
+      <div class="col-md-6 col-md-offset-3">
+    <%= form_tag edit_user_path(@user.id), method: 'patch' do %>
+        <strong>Prénom</strong> : <%= @user.first_name %>
+          <br>
+        <b><%= label_tag "Son nouveau prénom" %> <br>
+        <%= text_field_tag "first_name", nil, class: 'form-control', placeholder: "Juste" %> <br></b>
+        <strong>Nom</strong> :  <%= @user.last_name  %>
+          <br>
+        <b><%= label_tag "Son nouveau nom" %> <br>
+        <%= text_field_tag "last_name", nil, class: 'form-control',placeholder: 'Leblanc' %> <br></b>
+        <strong>Email</strong> :  <%= @user.email  %> <br>
+        <b><%= label_tag 'Son email' %> <br>
+        <%= email_field_tag 'email', nil, class: 'form-control',placeholder: 'juste@leblanc.com' %> <br></b>
+        <b><%= label_tag "Mot de passe pour validation (ne pas modifier)" %> <br>
+        <%= password_field_tag 'password', "#{@user.password_digest}", class: 'form-control' %>
+        <br>
+        <%= submit_tag 'Enregistre les modifications', class: 'btn btn-info'  %>
+    <% end %>
+
+    <% end %>
+</div>
+<br>

@@ -1,3 +1,7 @@
 <h2>Bienvenue dans The Club House</h2>
 
-<p>Si vous voulez découvrir quels sont les membres de cette si célèbre communauté, c'est par <a href="<%= users_path %>">ici</a></p>
+<% if logged_in? %>
+  <p>Pour parcourir la liste des membres de cette si célèbre communauté, c'est par <a href="<%= users_path %>">ici</a></p>
+<% else %>
+  <p>Pour accéder à la liste des membres de cette fabuleuse communauté, il faut vous <a href="<%= login_path %>">connecter</a> !</p>
+<% end %>

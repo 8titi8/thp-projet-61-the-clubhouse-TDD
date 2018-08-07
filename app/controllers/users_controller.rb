@@ -40,15 +40,16 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
     if current_user.nil?
       flash[:danger] = 'Vous devez vous connecter pour accéder à cette page !'
       redirect_to login_path
-    elsif current_user.id == params[:id].to_i
+    else current_user.id == params[:id].to_i
       @user = User.find(params[:id])
       render 'edit'
-    else
-      flash[:danger] = 'Vous devez vous connecter pour accéder à cette page !'
-      redirect_to login_path
+  #  else
+   #   flash[:danger] = 'Vous devez vous connecter pour accéder à cette page !'
+    #  redirect_to login_path
     end
   end
 
@@ -56,11 +57,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       flash[:success] = 'Vos informations ont bien été mises à jour !'
-      redirect_to user_path(@user.id)
-    else
-      flash[:warning] = 'Attention, pour modifier vos informations il faut entrer un mot de passe valide'
-      render 'edit'
-    end
+      redirect_to users_path
+    #else
+    #  flash[:warning] = 'Attention, pour modifier vos informations il faut entrer un mot de passe valide'
+    #  render 'edit'
+    #end
   end
 
   def destroy

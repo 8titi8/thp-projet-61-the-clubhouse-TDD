@@ -10,6 +10,10 @@
           <br>
           <strong>Email</strong> :  <%= @user.email  %></p>
 
+
+          <%= form_tag url_for(action: 'edit'), method: 'get' do  %> <br>
+            <%= submit_tag 'Modifier mes informations', class: 'btn btn-info' %>
+          <% end %>
           <%= form_tag url_for(action: 'destroy'), method: 'delete' do  %> <br>
             <%= submit_tag 'Supprimer mon compte', class: 'btn btn-secondary' %>
           <% end %>
