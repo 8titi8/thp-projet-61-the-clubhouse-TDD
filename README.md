@@ -13,7 +13,7 @@
 
 ### Lien Heroku
 
-Pour aller sur le site en *production*, merci de suivre ce lien : [Site de poney avec back-end](https://the-club-house.herokuapp.com/)
+Pour aller sur le site en *production*, merci de suivre ce lien : [Le ClubHouse](https://the-club-house.herokuapp.com/)
 
 Pour un meilleur rendu, préférez google chrome comme navigateur !  😉
 
